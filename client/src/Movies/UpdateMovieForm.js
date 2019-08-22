@@ -13,6 +13,7 @@ const UpdateMovieForm = props => {
     }
 
     const [movie, setMovie] = useState(blankMovie)
+
     console.log("params movie passed in to state", movie)
 
     useEffect(() => {
@@ -25,7 +26,8 @@ const UpdateMovieForm = props => {
     }, [props.match.params.id]);
 
     const changeHandler = ev => {
-        // ev.persist();
+        // ev.persist(); // ask henry 
+        setMovie({ ...movie, [ev.target.name]: ev.target.value })
     };
 
     const handleSubmit = e => {
