@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Route } from "react-router-dom";
+import axios from 'axios';
 import SavedList from "./Movies/SavedList";
 import MovieList from "./Movies/MovieList";
 import Movie from "./Movies/Movie";
@@ -11,6 +12,14 @@ const App = () => {
     setSavedList([...savedList, movie]);
   };
 
+  const updateMovie = movie => {
+
+  }
+
+  const deleteMovie = id => {
+
+  }
+
   return (
     <>
       <SavedList list={savedList} />
@@ -21,6 +30,13 @@ const App = () => {
           return <Movie {...props} addToSavedList={addToSavedList} />;
         }}
       />
+      <Route
+        path="/update-movie/:id"
+        render={props => {
+          return <Movie {...props} addToSavedList={addToSavedList} />;
+        }}
+      />
+
     </>
   );
 };
