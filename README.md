@@ -16,6 +16,9 @@
 - The form should make a PUT request to the server when submitted
 - When the call comes back successfully, reset your form state and route the user to `/movies` where they will see the updated movie in the list
 
+// make api get request in form
+// editing the movie: 1) get data for movie out of state stored somewhere in app (same as recitation yesterday), 2) in form, make get request to individual movie (movie/1) and set that as value you will edit in the form
+
 Movie object format:
 
 ```

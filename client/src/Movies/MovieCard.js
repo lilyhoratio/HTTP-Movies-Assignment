@@ -1,10 +1,7 @@
 import React from 'react';
 
 const MovieCard = props => {
-  const { id, title, director, metascore, stars } = props.movie;
-
-  console.log("movie card props", props)
-
+  const { title, director, metascore, stars } = props.movie;
   return (
     <div className="movie-card">
       <h2>{title}</h2>
@@ -21,9 +18,7 @@ const MovieCard = props => {
           {star}
         </div>
       ))}
-      <button onClick={() => { console.log("delete") }}>delete</button>
-      {/* <button onClick={props.deleteMovie(id)}>delete</button> */}
-    </div >
+    </div>
   );
 };
 
