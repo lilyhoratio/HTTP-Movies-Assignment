@@ -3,6 +3,8 @@ import axios from 'axios'
 
 const UpdateMovieForm = props => {
 
+    console.log("update movie form props", props)
+
     const blankMovie = {
         title: "",
         director: "",
@@ -11,12 +13,16 @@ const UpdateMovieForm = props => {
     }
 
     const [movie, setMovie] = useState(blankMovie)
+    console.log("params movie passed in to state", movie)
 
-    // useEffect(() => {
-    //     const id = props.match.params.id;
-    //     const itemInArr = props.items.find(item => `${item.id}` === id);
-    //     if (itemInArr) setItem(itemInArr);
-    // }, [props.items, props.match.params.id]);
+    useEffect(() => {
+        const movieId = props.match.params.id
+        axios.get(`http://localhost:5000/api/movies/${movieId}`)
+            .then(res => {
+                setMovie(res.data)
+            })
+            .catch(err => console.log("error", err))
+    }, [props.match.params.id]);
 
     const changeHandler = ev => {
         // ev.persist();
