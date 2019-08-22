@@ -1,7 +1,8 @@
-import react, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const UpdateMovieForm = props => {
+
     const blankMovie = {
         title: "",
         director: "",
@@ -11,52 +12,57 @@ const UpdateMovieForm = props => {
 
     const [movie, setMovie] = useState(blankMovie)
 
+    // useEffect(() => {
+    //     const id = props.match.params.id;
+    //     const itemInArr = props.items.find(item => `${item.id}` === id);
+    //     if (itemInArr) setItem(itemInArr);
+    // }, [props.items, props.match.params.id]);
+
+    const changeHandler = ev => {
+        // ev.persist();
+    };
+
+    const handleSubmit = e => {
+        e.preventDefault();
+    };
+
     return (
         <div>
             <h2>Update Movie</h2>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
-                    name="name"
+                    name="title"
                     onChange={changeHandler}
-                    placeholder="name"
-                    value={movie.name}
+                    placeholder="title"
+                    value={movie.title}
                 />
                 <div className="baseline" />
 
                 <input
-                    type="number"
-                    name="price"
+                    type="text"
+                    name="director"
                     onChange={changeHandler}
-                    placeholder="Price"
-                    value={movie.price}
-                />
-                <div className="baseline" />
-
-                <input
-                    type="string"
-                    name="imageUrl"
-                    onChange={changeHandler}
-                    placeholder="Image"
-                    value={movie.imageUrl}
+                    placeholder="director"
+                    value={movie.director}
                 />
                 <div className="baseline" />
 
                 <input
                     type="string"
-                    name="description"
+                    name="metascore"
                     onChange={changeHandler}
-                    placeholder="Description"
-                    value={movie.description}
+                    placeholder="metascore"
+                    value={movie.metascore}
                 />
                 <div className="baseline" />
 
                 <input
                     type="string"
-                    name="shipping"
+                    name="stars"
                     onChange={changeHandler}
-                    placeholder="Shipping"
-                    value={movie.shipping}
+                    placeholder="stars"
+                    value={movie.stars}
                 />
                 <div className="baseline" />
 
@@ -64,5 +70,6 @@ const UpdateMovieForm = props => {
             </form>
         </div>
     );
-
 }
+
+export default UpdateMovieForm;
