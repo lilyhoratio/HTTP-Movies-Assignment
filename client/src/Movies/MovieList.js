@@ -8,9 +8,9 @@ export default class MovieList extends Component {
   constructor(props) {
     console.log("movielist props", props)
     super(props);
-    this.state = {
-      movies: []
-    };
+    // this.state = {
+    //   movies: []
+    // };
   }
 
   // define function to do get request

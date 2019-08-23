@@ -10,7 +10,6 @@ const App = () => {
   const [savedList, setSavedList] = useState([]);
   const [movies, setMovies] = useState([])
 
-
   const addToSavedList = movie => {
     setSavedList([...savedList, movie]);
   };
