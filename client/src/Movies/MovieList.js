@@ -2,18 +2,17 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link, Route } from "react-router-dom";
 import MovieCard from "./MovieCard";
-import UpdateMovieForm from "./UpdateMovieForm"
+import UpdateMovieForm from "./UpdateMovieForm";
 
 export default class MovieList extends Component {
   constructor(props) {
-    console.log("movielist props", props)
+    console.log("movielist props", props);
     super(props);
-    // this.state = {
-    //   movies: []
-    // };
+    this.state = {
+      movies: []
+    };
   }
 
-  // define function to do get request
   componentDidMount() {
     axios
       .get("http://localhost:5000/api/movies")
@@ -21,13 +20,24 @@ export default class MovieList extends Component {
       .catch(err => console.log(err.response));
   }
 
+  // componentWillReceiveProps() {
+  //   axios
+  //     .get("http://localhost:5000/api/movies")
+  //     .then(res => this.setState({ movies: res.data }))
+  //     .catch(err => console.log(err.response));
+  // }
+
   render() {
     return (
       <>
         {/* SUBROUTE - <Route exact path="/" /> */}
         <div className="movie-list">
-          {this.props.movies.map(movie => (
-            <MovieDetails key={movie.id} movie={movie} movies={this.props.movies} />
+          {this.state.movies.map(movie => (
+            <MovieDetails
+              key={movie.id}
+              movie={movie}
+              movies={this.props.movies}
+            />
           ))}
         </div>
 
