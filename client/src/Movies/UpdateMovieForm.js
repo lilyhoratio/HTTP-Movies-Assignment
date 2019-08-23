@@ -40,7 +40,7 @@ const UpdateMovieForm = props => {
                 console.log("PUT TO EDIT", res)
                 console.log("HERE", props.movies)
                 // 2 - update MovieList component state with new movie
-                props.setMovies([...props.movies, res.data])
+                // props.setMovies([...props.movies, res.data])
                 // 3 - reset form to blank state
                 setMovie(blankMovie)
                 // 4 - reroute to movie list
@@ -48,6 +48,10 @@ const UpdateMovieForm = props => {
             })
             .catch(err => console.log(err.response))
     };
+
+    if (!movie) {
+        return <div>Loading...</div>
+    }
 
     return (
         <div>

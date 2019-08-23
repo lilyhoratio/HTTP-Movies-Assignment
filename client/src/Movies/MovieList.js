@@ -5,21 +5,21 @@ import MovieCard from "./MovieCard";
 import UpdateMovieForm from "./UpdateMovieForm"
 
 export default class MovieList extends Component {
-  // constructor(props) {
-  //   console.log("movielist props", props)
-  //   super(props);
-  //   this.state = {
-  //     movies: []
-  //   };
-  // }
+  constructor(props) {
+    console.log("movielist props", props)
+    super(props);
+    this.state = {
+      movies: []
+    };
+  }
 
   // define function to do get request
-  // componentDidMount() {
-  //   axios
-  //     .get("http://localhost:5000/api/movies")
-  //     .then(res => this.setState({ movies: res.data }))
-  //     .catch(err => console.log(err.response));
-  // }
+  componentDidMount() {
+    axios
+      .get("http://localhost:5000/api/movies")
+      .then(res => this.setState({ movies: res.data }))
+      .catch(err => console.log(err.response));
+  }
 
   render() {
     return (
