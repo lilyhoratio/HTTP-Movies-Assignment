@@ -3,6 +3,7 @@ import axios from "axios";
 import MovieCard from "./MovieCard";
 export default class Movie extends React.Component {
   constructor(props) {
+    console.log("movie props", props)
     super(props);
     this.state = {
       movie: null
@@ -42,6 +43,8 @@ export default class Movie extends React.Component {
         <div className="save-button" onClick={this.saveMovie}>
           Save
         </div>
+        {/* IF USING SUBROUTING */}
+        {/* <div className="update-button" onClick={() => this.props.history.push(`/movies/update-movie/${this.state.movie.id}`)}> */}
         <div className="update-button" onClick={() => this.props.history.push(`/update-movie/${this.state.movie.id}`)}>
           Update
         </div>

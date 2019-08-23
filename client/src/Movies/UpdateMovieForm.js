@@ -16,8 +16,9 @@ const UpdateMovieForm = props => {
 
     console.log("params movie passed in to state", movie)
 
+    const movieId = props.match.params.id
+
     useEffect(() => {
-        const movieId = props.match.params.id
         axios.get(`http://localhost:5000/api/movies/${movieId}`)
             .then(res => {
                 setMovie(res.data)
@@ -30,8 +31,22 @@ const UpdateMovieForm = props => {
         setMovie({ ...movie, [ev.target.name]: ev.target.value })
     };
 
+    // PUT REQUEST to update movie
     const handleSubmit = e => {
         e.preventDefault();
+        // 1 - edit the movie (PUT)
+        axios.put(`http://localhost:5000/api/movies/${movie.id}`, movie)
+            .then(res => {
+                console.log("PUT TO EDIT", res)
+                console.log("HERE", props.movies)
+                // 2 - update MovieList component state with new movie
+                props.setMovies([...props.movies, res.data])
+                // 3 - reset form to blank state
+                setMovie(blankMovie)
+                // 4 - reroute to movie list
+                props.history.push("/")
+            })
+            .catch(err => console.log(err.response))
     };
 
     return (
