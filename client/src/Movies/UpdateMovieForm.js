@@ -31,6 +31,16 @@ const UpdateMovieForm = props => {
     setMovie({ ...movie, [ev.target.name]: ev.target.value });
   };
 
+  const starChangeHandler = (e, index) => {
+    e.persist();
+    let starArray = [...movie.stars];
+    starArray[index] = e.target.value;
+    setMovie({
+      ...movie, // keep previous movies
+      stars: starArray
+    });
+  };
+
   // PUT REQUEST to update movie
   const handleSubmit = e => {
     e.preventDefault();
@@ -99,9 +109,9 @@ const UpdateMovieForm = props => {
               <input
                 type="string"
                 name="stars"
-                onChange={changeHandler}
+                onChange={e => starChangeHandler(e, index)}
                 placeholder="stars"
-                value={movie.stars}
+                value={starName}
               />
             );
           })}
