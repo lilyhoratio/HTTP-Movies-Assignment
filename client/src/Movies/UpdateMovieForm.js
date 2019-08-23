@@ -27,14 +27,15 @@ const UpdateMovieForm = props => {
   }, [props.match.params.id]);
 
   const changeHandler = ev => {
-    // ev.persist(); // ask henry
+    ev.persist(); // ask henry - has to do with async?
     setMovie({ ...movie, [ev.target.name]: ev.target.value });
   };
 
   const starChangeHandler = (e, index) => {
     e.persist();
-    let starArray = [...movie.stars];
-    starArray[index] = e.target.value;
+    let starArray = [...movie.stars]; // create array to pass in other movie stars
+    starArray[index] = e.target.value; //
+
     setMovie({
       ...movie, // keep previous movies
       stars: starArray
@@ -45,18 +46,38 @@ const UpdateMovieForm = props => {
   const handleSubmit = e => {
     e.preventDefault();
     // 1 - edit the movie (PUT)
+    // axios
+    //   .put(`http://localhost:5000/api/movies/${movie.id}`, movie)
+    //   .then(res => {
+    //     console.log("PUT REQUEST", res);
+    //     // 2 - update MovieList component state with new movie
+    //     // props.setMovies([...props.movies, res.data])
+    //     // 3 - reset form to blank state
+    //     setMovie(blankMovie);
+    //     // 4 - reroute to movie list
+    //     props.history.push("/");
+    //   })
+    //   .catch(err => console.log(err.response));
+
+    // workaround, but shouldn't the movies list update???
     axios
       .put(`http://localhost:5000/api/movies/${movie.id}`, movie)
       .then(res => {
-        console.log("PUT REQUEST", res);
-        // 2 - update MovieList component state with new movie
-        // props.setMovies([...props.movies, res.data])
-        // 3 - reset form to blank state
+        console.log(res);
         setMovie(blankMovie);
-        // 4 - reroute to movie list
+        let tmp = props.movies.map(movie => {
+          if (`${movie.id}` === props.match.params.id) {
+            return res.data;
+          } else {
+            return movie;
+          }
+        });
+        props.setMovies(tmp);
         props.history.push("/");
       })
-      .catch(err => console.log(err.response));
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   if (!movie) {
