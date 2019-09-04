@@ -3,6 +3,7 @@ import axios from "axios";
 import MovieCard from "./MovieCard";
 export default class Movie extends React.Component {
   constructor(props) {
+    console.log("movie props", props)
     super(props);
     this.state = {
       movie: null
@@ -31,6 +32,16 @@ export default class Movie extends React.Component {
     addToSavedList(this.state.movie);
   };
 
+  deleteMovie = e => {
+    e.preventDefault();
+    axios.delete(`http://localhost:5000/api/movies/${this.state.movie.id}`)
+      .then(res => {
+        console.log(res)
+        this.props.history.push('/')
+      })
+      .catch(err => console.log(err.response))
+  }
+
   render() {
     if (!this.state.movie) {
       return <div>Loading movie information...</div>;
@@ -42,7 +53,15 @@ export default class Movie extends React.Component {
         <div className="save-button" onClick={this.saveMovie}>
           Save
         </div>
-      </div>
+        {/* IF USING SUBROUTING */}
+        {/* <div className="update-button" onClick={() => this.props.history.push(`/movies/update-movie/${this.state.movie.id}`)}> */}
+        <div className="update-button" onClick={() => this.props.history.push(`/update-movie/${this.state.movie.id}`)}>
+          Update
+        </div>
+        <div className="delete-button" onClick={this.deleteMovie}>
+          Delete
+        </div>
+      </div >
     );
   }
 }

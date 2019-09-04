@@ -77,12 +77,13 @@ app.put("/api/movies/:id", (req, res) => {
   if (!req.params.id)
     res.status(400).send("Your request is missing the movie id");
   if (
-    !req.body.id ||
+    req.body.id === undefined ||
     !req.body.title ||
     !req.body.director ||
     !req.body.metascore ||
     !req.body.stars
   ) {
+
     res
       .status(422)
       .send("Make sure your request body has all the fields it needs");
@@ -92,7 +93,7 @@ app.put("/api/movies/:id", (req, res) => {
       return req.body;
     }
     return movie;
-  })[0];
+  });
   res.status(200).send(req.body);
 });
 
@@ -103,7 +104,7 @@ app.delete("/api/movies/:id", (req, res) => {
   res.status(202).send(req.params.id);
 });
 
-app.get("/", function(req, res) {
+app.get("/", function (req, res) {
   res.send("App is working 👍");
 });
 
